@@ -1,0 +1,17 @@
+spring:
+  profiles:
+    active: prod
+
+
+    #数据源配置
+    datasource:
+      url: jdbc:mysql://loaclhost:3306/wechat?useUnicode=true&characterEncoding=utf8
+      username: wechat
+      password: wechat
+      driver-class-name: com.mysql.jdbc.Driver
+
+
+
+
+
+

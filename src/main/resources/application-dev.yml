@@ -1,0 +1,9 @@
+server:
+  port: 8082
+  context-path: /
+
+test:
+  id: ${random.int}
+  age: ${random.int(10,20)}
+  name: 小明${random.uuid}
+  date: 2017-12-18

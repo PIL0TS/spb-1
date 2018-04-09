@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tream.coach.line.dao.IRodeLineDao" >
+  <resultMap id="BaseResultMap" type="com.tream.coach.line.entity.RodeLine" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="from_station" property="fromStation" jdbcType="VARCHAR" />
+    <result column="to_station" property="toStation" jdbcType="VARCHAR" />
+    <result column="start_time" property="startTime" jdbcType="DATE" />
+    <result column="arrive_time" property="arriveTime" jdbcType="DATE" />
+    <result column="distance" property="distance" jdbcType="VARCHAR" />
+    <result column="car_code" property="carCode" jdbcType="VARCHAR" />
+    <result column="car_name" property="carName" jdbcType="VARCHAR" />
+    <result column="driver_id" property="driverId" jdbcType="VARCHAR" />
+    <result column="driver_name" property="driverName" jdbcType="VARCHAR" />
+    <result column="del_flag" property="delFlag" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, from_station, to_station, start_time, arrive_time, distance, car_code, car_name, 
+    driver_id, driver_name, del_flag
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from rode_line
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <select id="pageQuery" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM rode_line
+    WHERE del_flag = '0' and
+    <trim prefix=" " suffix=" " suffixOverrides="and" >
+      <if test="true" >
+        1 = 1 and
+      </if>
+      <if test="arg0.fromStation != null" >
+        from_station = #{arg0.fromStation,jdbcType=VARCHAR} and
+      </if>
+      <if test="arg0.toStation != null" >
+        to_station = #{toStation,jdbcType=VARCHAR} and
+      </if>
+      <if test="arg0.startTime != null" >
+        start_time = #{startTime,jdbcType=DATE} and
+      </if>
+      <if test="arg0.arriveTime != null" >
+        arrive_time = #{arriveTime,jdbcType=DATE} and
+      </if>
+      <if test="arg0.distance != null" >
+        distance = #{distance,jdbcType=VARCHAR} and
+      </if>
+      <if test="arg0.carCode != null" >
+        car_code = #{carCode,jdbcType=VARCHAR} and
+      </if>
+      <if test="arg0.carName != null" >
+        car_name = #{carName,jdbcType=VARCHAR} and
+      </if>
+      <if test="arg0.driverId != null" >
+        driver_id = #{driverId,jdbcType=VARCHAR} and
+      </if>
+      <if test="arg0.driverName != null" >
+        driver_name = #{driverName,jdbcType=VARCHAR} and
+      </if>
+    </trim>
+    
+    order by id   ASC
+    limit #{arg1},#{arg2}
+  </select>
+
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from rode_line
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.tream.coach.line.entity.RodeLine" >
+    insert into rode_line (id, from_station, to_station, 
+      start_time, arrive_time, distance, 
+      car_code, car_name, driver_id, 
+      driver_name, del_flag)
+    values (#{id,jdbcType=INTEGER}, #{fromStation,jdbcType=VARCHAR}, #{toStation,jdbcType=VARCHAR}, 
+      #{startTime,jdbcType=DATE}, #{arriveTime,jdbcType=DATE}, #{distance,jdbcType=VARCHAR}, 
+      #{carCode,jdbcType=VARCHAR}, #{carName,jdbcType=VARCHAR}, #{driverId,jdbcType=VARCHAR}, 
+      #{driverName,jdbcType=VARCHAR}, #{delFlag,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tream.coach.line.entity.RodeLine" >
+    insert into rode_line
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="fromStation != null" >
+        from_station,
+      </if>
+      <if test="toStation != null" >
+        to_station,
+      </if>
+      <if test="startTime != null" >
+        start_time,
+      </if>
+      <if test="arriveTime != null" >
+        arrive_time,
+      </if>
+      <if test="distance != null" >
+        distance,
+      </if>
+      <if test="carCode != null" >
+        car_code,
+      </if>
+      <if test="carName != null" >
+        car_name,
+      </if>
+      <if test="driverId != null" >
+        driver_id,
+      </if>
+      <if test="driverName != null" >
+        driver_name,
+      </if>
+      <if test="delFlag != null" >
+        del_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="fromStation != null" >
+        #{fromStation,jdbcType=VARCHAR},
+      </if>
+      <if test="toStation != null" >
+        #{toStation,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=DATE},
+      </if>
+      <if test="arriveTime != null" >
+        #{arriveTime,jdbcType=DATE},
+      </if>
+      <if test="distance != null" >
+        #{distance,jdbcType=VARCHAR},
+      </if>
+      <if test="carCode != null" >
+        #{carCode,jdbcType=VARCHAR},
+      </if>
+      <if test="carName != null" >
+        #{carName,jdbcType=VARCHAR},
+      </if>
+      <if test="driverId != null" >
+        #{driverId,jdbcType=VARCHAR},
+      </if>
+      <if test="driverName != null" >
+        #{driverName,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+
+
+
+
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.tream.coach.line.entity.RodeLine" >
+    update rode_line
+    <set >
+      <if test="fromStation != null" >
+        from_station = #{fromStation,jdbcType=VARCHAR},
+      </if>
+      <if test="toStation != null" >
+        to_station = #{toStation,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        start_time = #{startTime,jdbcType=DATE},
+      </if>
+      <if test="arriveTime != null" >
+        arrive_time = #{arriveTime,jdbcType=DATE},
+      </if>
+      <if test="distance != null" >
+        distance = #{distance,jdbcType=VARCHAR},
+      </if>
+      <if test="carCode != null" >
+        car_code = #{carCode,jdbcType=VARCHAR},
+      </if>
+      <if test="carName != null" >
+        car_name = #{carName,jdbcType=VARCHAR},
+      </if>
+      <if test="driverId != null" >
+        driver_id = #{driverId,jdbcType=VARCHAR},
+      </if>
+      <if test="driverName != null" >
+        driver_name = #{driverName,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tream.coach.line.entity.RodeLine" >
+    update rode_line
+    set from_station = #{fromStation,jdbcType=VARCHAR},
+      to_station = #{toStation,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=DATE},
+      arrive_time = #{arriveTime,jdbcType=DATE},
+      distance = #{distance,jdbcType=VARCHAR},
+      car_code = #{carCode,jdbcType=VARCHAR},
+      car_name = #{carName,jdbcType=VARCHAR},
+      driver_id = #{driverId,jdbcType=VARCHAR},
+      driver_name = #{driverName,jdbcType=VARCHAR},
+      del_flag = #{delFlag,jdbcType=CHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

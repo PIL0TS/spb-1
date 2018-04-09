@@ -1,0 +1,80 @@
+server:
+  port: 8082
+  context-path: /
+test:
+  id: ${random.int}
+  age: ${random.int(10,20)}
+  name: 小明${random.uuid}
+  date: 2017-12-19
+
+
+
+spring:
+    #数据源配置
+    datasource:
+      url: jdbc:mysql://localhost:3306/coachms?useUnicode=true&characterEncoding=utf8
+      username: coachms
+      password: coachms
+      driver-class-name: com.mysql.jdbc.Driver
+
+    #Redis配置
+    redis:
+      #Redis数据库索引（默认为0）
+      database: 0
+      #Redis服务器地址
+      host: 127.0.0.1
+      #Redis服务器端口
+      port: 6379
+      #Redis服务器连接密码（默认为空）
+      password:
+      #连接池
+      pool:
+        #最大连接数（使用负值表示没有限制）
+        max-active: 8
+        #最大阻塞等待时间（使用负值表示没有限制）
+        max-wait: -1
+        #最大空闲链接
+        max-idle: 8
+        #最小空闲链接
+        min-idle: 0
+        #连接超时时间（毫秒）
+        timeout: 0
+
+
+
+
+
+    #freemarker配置
+    freemarker:
+      template-loader-path: classpath:/web/
+      cache: false
+      charset: utf-8
+      check-template-location: true
+      content-type: text/html
+      expose-request-attributes: true
+      expose-session-attributes: true
+      request-context-attribute: request
+      suffix: .html
+      settings:
+        number_format: "#"
+
+
+
+
+
+mybatis:
+  #typeAliasesPackage: com.tream.coach.user.entity
+  mapperLocations: classpath:com/tream/coach/*/dao/mapper/*.xml,mapper/*.xml
+
+
+
+jwt:
+  header: Authorization   #http请求头所需要的字段
+  secret: mySecret        #jwt秘钥
+  expiration: 604800      #7天 单位:秒
+  auth-path: auth         #认证请求的路径
+  md5-key: randomKey        #md5加密混淆key
+
+
+logging.level.com.tream.coach.line.dao: debug
+

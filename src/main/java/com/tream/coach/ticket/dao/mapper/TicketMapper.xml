@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tream.coach.ticket.dao.ITicketDao" >
+  <resultMap id="BaseResultMap" type="com.tream.coach.ticket.entity.Ticket" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="ticket_id" property="ticketId" jdbcType="VARCHAR" />
+    <result column="departure" property="departure" jdbcType="VARCHAR" />
+    <result column="destnation" property="destnation" jdbcType="VARCHAR" />
+    <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
+    <result column="ticket_num" property="ticketNum" jdbcType="INTEGER" />
+    <result column="pay_money" property="payMoney" jdbcType="DOUBLE" />
+    <result column="pay_time" property="payTime" jdbcType="TIMESTAMP" />
+    <result column="pay_user_id" property="payUserId" jdbcType="INTEGER" />
+    <result column="pay_user_name" property="payUserName" jdbcType="VARCHAR" />
+    <result column="pay_user_identify" property="payUserIdentify" jdbcType="VARCHAR" />
+    <result column="buy_type_code" property="buyTypeCode" jdbcType="VARCHAR" />
+    <result column="buy_type_name" property="buyTypeName" jdbcType="VARCHAR" />
+    <result column="pay_type_code" property="payTypeCode" jdbcType="VARCHAR" />
+    <result column="pay_type_name" property="payTypeName" jdbcType="VARCHAR" />
+    <result column="pay_user_tel" property="payUserTel" jdbcType="VARCHAR" />
+    <result column="take_flag" property="takeFlag" jdbcType="CHAR" />
+    <result column="del_flag" property="delFlag" jdbcType="CHAR" />
+    <result column="return_flag" property="returnFlag" jdbcType="CHAR" />
+    <result column="return_money" property="returnMoney" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, ticket_id, departure, destnation, start_time, ticket_num, pay_money, pay_time, 
+    pay_user_id, pay_user_name, pay_user_identify, buy_type_code, buy_type_name, pay_type_code, 
+    pay_type_name, pay_user_tel, take_flag, del_flag, return_flag, return_money
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from ticket
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from ticket
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.tream.coach.ticket.entity.Ticket" >
+    insert into ticket (id, ticket_id, departure, 
+      destnation, start_time, ticket_num, 
+      pay_money, pay_time, pay_user_id, 
+      pay_user_name, pay_user_identify, buy_type_code, 
+      buy_type_name, pay_type_code, pay_type_name, 
+      pay_user_tel, take_flag, del_flag, 
+      return_flag, return_money)
+    values (#{id,jdbcType=INTEGER}, #{ticketId,jdbcType=VARCHAR}, #{departure,jdbcType=VARCHAR}, 
+      #{destnation,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, #{ticketNum,jdbcType=INTEGER}, 
+      #{payMoney,jdbcType=DOUBLE}, #{payTime,jdbcType=TIMESTAMP}, #{payUserId,jdbcType=INTEGER}, 
+      #{payUserName,jdbcType=VARCHAR}, #{payUserIdentify,jdbcType=VARCHAR}, #{buyTypeCode,jdbcType=VARCHAR}, 
+      #{buyTypeName,jdbcType=VARCHAR}, #{payTypeCode,jdbcType=VARCHAR}, #{payTypeName,jdbcType=VARCHAR}, 
+      #{payUserTel,jdbcType=VARCHAR}, #{takeFlag,jdbcType=CHAR}, #{delFlag,jdbcType=CHAR}, 
+      #{returnFlag,jdbcType=CHAR}, #{returnMoney,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tream.coach.ticket.entity.Ticket" >
+    insert into ticket
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="ticketId != null" >
+        ticket_id,
+      </if>
+      <if test="departure != null" >
+        departure,
+      </if>
+      <if test="destnation != null" >
+        destnation,
+      </if>
+      <if test="startTime != null" >
+        start_time,
+      </if>
+      <if test="ticketNum != null" >
+        ticket_num,
+      </if>
+      <if test="payMoney != null" >
+        pay_money,
+      </if>
+      <if test="payTime != null" >
+        pay_time,
+      </if>
+      <if test="payUserId != null" >
+        pay_user_id,
+      </if>
+      <if test="payUserName != null" >
+        pay_user_name,
+      </if>
+      <if test="payUserIdentify != null" >
+        pay_user_identify,
+      </if>
+      <if test="buyTypeCode != null" >
+        buy_type_code,
+      </if>
+      <if test="buyTypeName != null" >
+        buy_type_name,
+      </if>
+      <if test="payTypeCode != null" >
+        pay_type_code,
+      </if>
+      <if test="payTypeName != null" >
+        pay_type_name,
+      </if>
+      <if test="payUserTel != null" >
+        pay_user_tel,
+      </if>
+      <if test="takeFlag != null" >
+        take_flag,
+      </if>
+      <if test="delFlag != null" >
+        del_flag,
+      </if>
+      <if test="returnFlag != null" >
+        return_flag,
+      </if>
+      <if test="returnMoney != null" >
+        return_money,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="ticketId != null" >
+        #{ticketId,jdbcType=VARCHAR},
+      </if>
+      <if test="departure != null" >
+        #{departure,jdbcType=VARCHAR},
+      </if>
+      <if test="destnation != null" >
+        #{destnation,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ticketNum != null" >
+        #{ticketNum,jdbcType=INTEGER},
+      </if>
+      <if test="payMoney != null" >
+        #{payMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="payTime != null" >
+        #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payUserId != null" >
+        #{payUserId,jdbcType=INTEGER},
+      </if>
+      <if test="payUserName != null" >
+        #{payUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="payUserIdentify != null" >
+        #{payUserIdentify,jdbcType=VARCHAR},
+      </if>
+      <if test="buyTypeCode != null" >
+        #{buyTypeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="buyTypeName != null" >
+        #{buyTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="payTypeCode != null" >
+        #{payTypeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="payTypeName != null" >
+        #{payTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="payUserTel != null" >
+        #{payUserTel,jdbcType=VARCHAR},
+      </if>
+      <if test="takeFlag != null" >
+        #{takeFlag,jdbcType=CHAR},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=CHAR},
+      </if>
+      <if test="returnFlag != null" >
+        #{returnFlag,jdbcType=CHAR},
+      </if>
+      <if test="returnMoney != null" >
+        #{returnMoney,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tream.coach.ticket.entity.Ticket" >
+    update ticket
+    <set >
+      <if test="ticketId != null" >
+        ticket_id = #{ticketId,jdbcType=VARCHAR},
+      </if>
+      <if test="departure != null" >
+        departure = #{departure,jdbcType=VARCHAR},
+      </if>
+      <if test="destnation != null" >
+        destnation = #{destnation,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ticketNum != null" >
+        ticket_num = #{ticketNum,jdbcType=INTEGER},
+      </if>
+      <if test="payMoney != null" >
+        pay_money = #{payMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="payTime != null" >
+        pay_time = #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payUserId != null" >
+        pay_user_id = #{payUserId,jdbcType=INTEGER},
+      </if>
+      <if test="payUserName != null" >
+        pay_user_name = #{payUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="payUserIdentify != null" >
+        pay_user_identify = #{payUserIdentify,jdbcType=VARCHAR},
+      </if>
+      <if test="buyTypeCode != null" >
+        buy_type_code = #{buyTypeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="buyTypeName != null" >
+        buy_type_name = #{buyTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="payTypeCode != null" >
+        pay_type_code = #{payTypeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="payTypeName != null" >
+        pay_type_name = #{payTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="payUserTel != null" >
+        pay_user_tel = #{payUserTel,jdbcType=VARCHAR},
+      </if>
+      <if test="takeFlag != null" >
+        take_flag = #{takeFlag,jdbcType=CHAR},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=CHAR},
+      </if>
+      <if test="returnFlag != null" >
+        return_flag = #{returnFlag,jdbcType=CHAR},
+      </if>
+      <if test="returnMoney != null" >
+        return_money = #{returnMoney,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tream.coach.ticket.entity.Ticket" >
+    update ticket
+    set ticket_id = #{ticketId,jdbcType=VARCHAR},
+      departure = #{departure,jdbcType=VARCHAR},
+      destnation = #{destnation,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      ticket_num = #{ticketNum,jdbcType=INTEGER},
+      pay_money = #{payMoney,jdbcType=DOUBLE},
+      pay_time = #{payTime,jdbcType=TIMESTAMP},
+      pay_user_id = #{payUserId,jdbcType=INTEGER},
+      pay_user_name = #{payUserName,jdbcType=VARCHAR},
+      pay_user_identify = #{payUserIdentify,jdbcType=VARCHAR},
+      buy_type_code = #{buyTypeCode,jdbcType=VARCHAR},
+      buy_type_name = #{buyTypeName,jdbcType=VARCHAR},
+      pay_type_code = #{payTypeCode,jdbcType=VARCHAR},
+      pay_type_name = #{payTypeName,jdbcType=VARCHAR},
+      pay_user_tel = #{payUserTel,jdbcType=VARCHAR},
+      take_flag = #{takeFlag,jdbcType=CHAR},
+      del_flag = #{delFlag,jdbcType=CHAR},
+      return_flag = #{returnFlag,jdbcType=CHAR},
+      return_money = #{returnMoney,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

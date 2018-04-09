@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tream.coach.user.dao.IUserDaot" >
+
+  <resultMap id="BaseResultMap" type="com.tream.coach.user.entity.User" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="login_id" property="loginId" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="age" property="age" jdbcType="INTEGER" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="tel" property="tel" jdbcType="VARCHAR" />
+    <result column="mail" property="mail" jdbcType="VARCHAR" />
+    <result column="role" property="role" jdbcType="VARCHAR" />
+    <result column="level" property="level" jdbcType="VARCHAR" />
+    <result column="identify_num" property="identifyNum" jdbcType="VARCHAR" />
+    <result column="del_flag" property="delFlag" jdbcType="CHAR" />
+    <result column="cost_sum" property="costSum" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, login_id, password, name, age, sex, address, tel, mail, role, level, identify_num, 
+    del_flag, cost_sum
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectListByLoginId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from user
+    where login_id = #{loginId}
+  </select>
+<!--  <select id="findByParam" resultMap="BaseResultMap"  parameterType="com.tream.coach.user.entity.User">
+
+  </select>
+
+-->
+
+  <select id="pageQueryUser" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM user
+    WHERE del_flag = '0' and
+    <trim prefix="" suffix="" suffixOverrides="and" >
+      <if test="true" >
+        1 = 1 and
+      </if>
+      <if test="arg0.name != null" >
+        name = #{arg0.name,jdbcType=VARCHAR} and
+      </if>
+      <if test="arg0.sex != null" >
+        sex = #{arg0.sex,jdbcType=VARCHAR} and
+      </if>
+      <if test="arg0.role != null" >
+        role = #{arg0.role,jdbcType=DATE} and
+      </if>
+      <if test="arg0.level != null" >
+        level = #{arg0.level,jdbcType=DATE} and
+      </if>
+      <if test="arg0.identifyNum != null" >
+        identify_num = #{arg0.identifyNum,jdbcType=VARCHAR} and
+      </if>
+      <if test="arg0.loginId != null" >
+        login_id = #{arg0.loginId,jdbcType=VARCHAR} and
+      </if>
+      <if test="arg0.id != null" >
+        id = #{arg0.id,jdbcType=VARCHAR} and
+      </if>
+    </trim>
+
+    order by id   ASC
+    limit #{arg1},#{arg2}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.tream.coach.user.entity.User" >
+    insert into user (id, login_id, password, 
+      name, age, sex, address, 
+      tel, mail, role, level, 
+      identify_num, del_flag, cost_sum
+      )
+    values (#{id,jdbcType=INTEGER}, #{loginId,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, #{sex,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{tel,jdbcType=VARCHAR}, #{mail,jdbcType=VARCHAR}, #{role,jdbcType=VARCHAR}, #{level,jdbcType=VARCHAR}, 
+      #{identifyNum,jdbcType=VARCHAR}, #{delFlag,jdbcType=CHAR}, #{costSum,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.tream.coach.user.entity.User" >
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="loginId != null" >
+        login_id,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="age != null" >
+        age,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="tel != null" >
+        tel,
+      </if>
+      <if test="mail != null" >
+        mail,
+      </if>
+      <if test="role != null" >
+        role,
+      </if>
+      <if test="level != null" >
+        level,
+      </if>
+      <if test="identifyNum != null" >
+        identify_num,
+      </if>
+      <if test="delFlag != null" >
+        del_flag,
+      </if>
+      <if test="costSum != null" >
+        cost_sum,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="loginId != null" >
+        #{loginId,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="mail != null" >
+        #{mail,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null" >
+        #{role,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=VARCHAR},
+      </if>
+      <if test="identifyNum != null" >
+        #{identifyNum,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=CHAR},
+      </if>
+      <if test="costSum != null" >
+        #{costSum,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tream.coach.user.entity.User" >
+    update user
+    <set >
+      <if test="loginId != null" >
+        login_id = #{loginId,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="mail != null" >
+        mail = #{mail,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null" >
+        role = #{role,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        level = #{level,jdbcType=VARCHAR},
+      </if>
+      <if test="identifyNum != null" >
+        identify_num = #{identifyNum,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=CHAR},
+      </if>
+      <if test="costSum != null" >
+        cost_sum = #{costSum,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tream.coach.user.entity.User" >
+    update user
+    set login_id = #{loginId,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      age = #{age,jdbcType=INTEGER},
+      sex = #{sex,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      mail = #{mail,jdbcType=VARCHAR},
+      role = #{role,jdbcType=VARCHAR},
+      level = #{level,jdbcType=VARCHAR},
+      identify_num = #{identifyNum,jdbcType=VARCHAR},
+      del_flag = #{delFlag,jdbcType=CHAR},
+      cost_sum = #{costSum,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+</mapper>
