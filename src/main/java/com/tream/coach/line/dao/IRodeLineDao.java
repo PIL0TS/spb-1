@@ -18,5 +18,10 @@ public interface IRodeLineDao {
 
     int updateByPrimaryKey(com.tream.coach.line.entity.RodeLine record);
 
-    List<RodeLine> pageQueryLine(RodeLine rodeLine, int m, int n) throws Exception;
+
+
+
+    List<RodeLine> pageQuery(RodeLine rodeLine, int m, int n);
+
+    int count(RodeLine rodeLine);
 }

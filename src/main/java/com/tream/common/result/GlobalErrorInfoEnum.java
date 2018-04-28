@@ -2,7 +2,7 @@ package com.tream.common.result;
 
 public enum GlobalErrorInfoEnum implements ErrorInfoInterFace{
 
-    SUCCESS(0 , "success"),
+    SUCCESS(200 , "success"),
     NOT_FOUNT(1, "service not fount"),
 
     /**
@@ -10,12 +10,21 @@ public enum GlobalErrorInfoEnum implements ErrorInfoInterFace{
      */
     TOKEN_EXPRIED(700, "token过期"),
     TOKEN_ERROR(700, "token验证失败"),
-
+    /**
+     * 参数异常
+     */
+    PARAM_ERROR(700, "参数错误"),
     /**
      * 账号密码错误
      */
 
     LOGIN_ERROR(700, "token验证失败"),
+    /**
+     * 查询错误
+     */
+
+    QUERY_ERROR(700, "查询错误"),
+
     /**
      * 签名异常
      */
@@ -32,9 +41,6 @@ public enum GlobalErrorInfoEnum implements ErrorInfoInterFace{
      * 渲染页面错误
      */
     WRITE_ERROR(500, "渲染页面错误");
-
-
-
 
 
 

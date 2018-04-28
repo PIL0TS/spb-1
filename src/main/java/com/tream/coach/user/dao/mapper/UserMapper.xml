@@ -28,6 +28,56 @@
     from user
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="sumLoginId" resultType="int"  parameterType="java.lang.String" >
+    select
+    count(login_id)
+    from user
+    where login_id = #{loginId}
+  </select>
+  <select id="count" resultType="int" parameterType="com.tream.coach.user.entity.User">
+    select
+    count(id)
+    from user
+    where
+    <trim prefix="" suffix="" suffixOverrides="and" >
+      <if test="true" >
+        1 = 1 and
+      </if>
+      <if test="name != null" >
+        name like '%${name}%' and
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=VARCHAR} and
+      </if>
+      <if test="role != null" >
+        role = #{role,jdbcType=DATE} and
+      </if>
+      <if test="level != null" >
+        level = #{level,jdbcType=DATE} and
+      </if>
+      <if test="identifyNum != null" >
+        identify_num = #{identifyNum,jdbcType=VARCHAR} and
+      </if>
+      <if test="loginId != null" >
+        login_id = #{loginId,jdbcType=VARCHAR} and
+      </if>
+      <if test="id != null" >
+        id = #{id,jdbcType=VARCHAR} and
+      </if>
+    </trim>
+  </select>
+
+
+
+  <delete id="delByIds" >
+    delete from
+    user
+    where id in
+    <foreach item="item" index="index" collection="ids"
+             open="(" separator="," close=")">
+      #{item}
+    </foreach>
+  </delete>
   <select id="selectListByLoginId" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select
     <include refid="Base_Column_List" />
@@ -50,7 +100,7 @@
         1 = 1 and
       </if>
       <if test="arg0.name != null" >
-        name = #{arg0.name,jdbcType=VARCHAR} and
+        name like '%${arg0.name}%' and
       </if>
       <if test="arg0.sex != null" >
         sex = #{arg0.sex,jdbcType=VARCHAR} and
@@ -72,7 +122,7 @@
       </if>
     </trim>
 
-    order by id   ASC
+    order by login_id  DESC , id asc
     limit #{arg1},#{arg2}
   </select>
 

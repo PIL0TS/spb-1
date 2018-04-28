@@ -2,6 +2,7 @@ package com.tream.coach.user.dao;
 
 
 import com.tream.coach.user.entity.User;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -24,5 +25,10 @@ public interface IUserDaot {
     List<User> pageQueryUser(User user, Integer m, Integer n);
 
     List<User> selectListByLoginId(String LoginId);
+
+    int sumLoginId (String loginId);
+
+    void delByIds (@Param(value="ids")int[] ids) ;
+    int count(User user);
 
 }

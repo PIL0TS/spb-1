@@ -76,5 +76,5 @@ jwt:
   md5-key: randomKey        #md5加密混淆key
 
 
-logging.level.com.tream.coach.line.dao: debug
+logging.level.com.tream.coach.user.dao: debug
 

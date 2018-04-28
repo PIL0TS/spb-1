@@ -15,12 +15,15 @@ public class UserServiceImpl implements IUserService{
 
 
     @Override
-    public boolean insert(User entity) {
-        if(userDao.insert(entity) < 0) {
-            return false;
-        } else {
+    public boolean insert(User entity) throws Exception {
+
+        try {
+            userDao.insert(entity);
             return true;
+        } catch (Exception e) {
+            throw new Exception("添加用户错误");
         }
+
     }
 
     @Override
@@ -49,9 +52,11 @@ public class UserServiceImpl implements IUserService{
     }
 
     @Override
-    public List<User> pageQueryByParam(User entity, Integer m, Integer n) {
+    public List<User> pageQueryByParam(User entity, Integer pageNum, Integer numPerPage) {
 
-        return userDao.pageQueryUser(entity, m, n);
+        int m = (pageNum - 1) * numPerPage;
+
+        return userDao.pageQueryUser(entity, m, 10);
 
 
 
@@ -60,5 +65,35 @@ public class UserServiceImpl implements IUserService{
     @Override
     public User findById(Integer id) {
         return userDao.selectByPrimaryKey(id);
+    }
+    @Override
+    public int allLoginId(String loginId) throws Exception {
+       try{
+           return userDao.sumLoginId(loginId);
+       } catch (Exception e) {
+           e.printStackTrace();
+           return  -1;
+       }
+
+    }
+
+    @Override
+    public int delByIds(int[] ids) throws Exception {
+        try {
+            userDao.delByIds(ids);
+            return 1;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+
+        }
+    }
+
+    @Override
+    public int maxRow(User user) throws Exception {
+
+        int i = userDao.count(user);
+
+        return i;
     }
 }

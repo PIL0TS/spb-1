@@ -7,23 +7,14 @@ public class RodeLine {
     private Integer id;
 
     private String fromStation;
-
     private String toStation;
-
     private Date startTime;
-
     private Date arriveTime;
-
     private String distance;
-
     private String carCode;
-
     private String carName;
-
     private String driverId;
-
     private String driverName;
-
     private String delFlag;
 
     public Integer getId() {

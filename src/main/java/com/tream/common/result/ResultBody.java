@@ -16,10 +16,21 @@ public class ResultBody {
     public ResultBody(Object result) {
         this.code = GlobalErrorInfoEnum.SUCCESS.getCode();
 
-
+        this.message = "success";
         this.result = result;
     }
 
+    public ResultBody(int code, String message, Object result) {
+        this.code = code;
+        this.message = message;
+        this.result = result;
+    }
+
+    public ResultBody(String message, Object result) {
+        this.message = message;
+        this.result = result;
+        this.code = 200;
+    }
 
     public int getCode() {
         return code;

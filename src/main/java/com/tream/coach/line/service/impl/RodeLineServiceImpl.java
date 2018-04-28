@@ -14,6 +14,13 @@ public class RodeLineServiceImpl implements IRodeLineService {
     @Autowired
     IRodeLineDao lineDao;
 
+
+    /**
+     * ----测试数据
+     * @param num
+     * @return
+     * @throws Exception
+     */
     @Override
     public boolean insertTest(Integer num) throws Exception {
 
@@ -33,15 +40,37 @@ public class RodeLineServiceImpl implements IRodeLineService {
 
     }
 
+
     @Override
-    public List<RodeLine> pageQueryByPrama() throws Exception {
+    public List<RodeLine> pageQueryByParam(RodeLine rodeLine, int pageNum, int numPerPage) {
+        int m = (pageNum - 1) * numPerPage;
 
-        RodeLine rl = new RodeLine();
-
-        List<RodeLine> list = lineDao.pageQueryLine(rl, 3, 3);
-
-
-
-        return list;
+        return lineDao.pageQuery(rodeLine, m, 10);
     }
+
+    @Override
+    public int maxRow(RodeLine rodeLine) {
+        return lineDao.count(rodeLine);
+    }
+
+    @Override
+    public boolean insert(RodeLine rodeLine){
+        try {
+            lineDao.insert(rodeLine);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean update(RodeLine rodeLine) {
+        if(lineDao.updateByPrimaryKey(rodeLine) < 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+
 }
